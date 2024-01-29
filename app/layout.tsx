@@ -11,6 +11,9 @@ const roboto = Roboto({
 export const metadata: Metadata = {
   title: "Portal",
   description: "Portal for User and Courier Platform",
+  icons: {
+    icon: "/icon.png",
+  },
 };
 
 export default function RootLayout({
