@@ -126,6 +126,29 @@ export async function updateIsDelivered(formData: FormData) {
   }
 }
 
+export async function deleteOrders(formData: FormData) {
+  const orderNumbersToDelete = JSON.parse(formData.get("rowData") as string);
+  try {
+    await prisma.order
+      .deleteMany({
+        where: {
+          orderNumber: {
+            in: orderNumbersToDelete,
+          },
+        },
+      })
+      .finally(() => {
+        prisma.$disconnect();
+      });
+    revalidatePath("/courier");
+
+    return { success: `Deleted ${orderNumbersToDelete?.length} orders 🤫` };
+  } catch (error) {
+    console.log(error);
+    return { error: `Failed to delete rows ${error}🤔` };
+  }
+}
+
 export const getOrders = async (username?: string) => {
   try {
     const orders = await prisma.order

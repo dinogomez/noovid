@@ -37,6 +37,7 @@ import { Input } from "@/commons/components/ui/input";
 import { clearCachesByServerAction } from "@/commons/lib/actions";
 import { useRouter } from "next/navigation";
 import { Toaster } from "sonner";
+import DataTableRemoveButton from "../../ui/data-table/data-table-remove-button";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -54,6 +55,8 @@ export function CourierDataTable<TData, TValue>({
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   );
+  const [rowSelection, setRowSelection] = React.useState({});
+
   const [filtering, setFiltering] = React.useState("");
   useEffect(() => {
     setTableData(initialData);
@@ -74,10 +77,13 @@ export function CourierDataTable<TData, TValue>({
     getFilteredRowModel: getFilteredRowModel(),
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
+    onRowSelectionChange: setRowSelection,
+
     state: {
       sorting,
       columnFilters,
       globalFilter: filtering,
+      rowSelection,
     },
     meta: {
       updateData: (rowIndex: number, columnId: any, value: any) =>
@@ -111,6 +117,9 @@ export function CourierDataTable<TData, TValue>({
       <div className="flex items-center justify-between">
         <div className="flex flex-1 items-center space-x-2">
           <CourierRegisterForm triggerButtonLabel={"Add"} />
+          <DataTableRemoveButton
+            rows={table.getFilteredSelectedRowModel().rows}
+          />
           <Input
             placeholder="Filter Orders..."
             value={filtering}
@@ -226,7 +235,7 @@ export function CourierDataTable<TData, TValue>({
         <Toaster richColors expand={true} />
       </div>
       <div className="flex items-center justify-end space-x-2 py-4">
-        <DataTablePagination table={table} />
+        <DataTablePagination hasRowSelection={true} table={table} />
       </div>
     </>
   );

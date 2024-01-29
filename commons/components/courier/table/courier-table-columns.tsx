@@ -2,6 +2,7 @@
 
 import { Badge } from "@/commons/components/ui/badge";
 import { Button } from "@/commons/components/ui/button";
+import { Checkbox } from "@/commons/components/ui/checkbox";
 import { DataTableColumnHeader } from "@/commons/components/ui/data-table/data-table-column-header";
 import { OrderSchema } from "@/commons/schema";
 import { CalendarIcon } from "@radix-ui/react-icons";
@@ -10,6 +11,30 @@ import * as z from "zod";
 import SelectCell from "./courier-select-cell";
 
 export const columns: ColumnDef<z.infer<typeof OrderSchema>>[] = [
+  {
+    id: "select",
+    header: ({ table }) => (
+      <Checkbox
+        checked={
+          table.getIsAllPageRowsSelected() ||
+          (table.getIsSomePageRowsSelected() && "indeterminate")
+        }
+        onCheckedChange={(value: any) =>
+          table.toggleAllPageRowsSelected(!!value)
+        }
+        aria-label="Select all"
+      />
+    ),
+    cell: ({ row }) => (
+      <Checkbox
+        checked={row.getIsSelected()}
+        onCheckedChange={(value: any) => row.toggleSelected(!!value)}
+        aria-label="Select row"
+      />
+    ),
+    enableSorting: false,
+    enableHiding: false,
+  },
   {
     accessorKey: "orderNumber",
     header: "Order #",

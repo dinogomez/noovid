@@ -13,7 +13,7 @@ export const siteConfig: SiteConfig = {
 };
 
 export const courierConfig: CourierConfig = {
-  title: "Azamon",
+  title: "Nootrack",
   desc: "Courier Service",
   backButtonLabel: "Dashboard",
   route: "/courier",
