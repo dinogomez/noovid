@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model Order {
+  id           BigInt       @id(map: "order_pkey") @default(autoincrement())
+  created_at   DateTime     @default(now()) @db.Timestamptz(6)
+  sender       String?
+  isDelivered  Boolean?
+  recepient    BigInt?
+  orderStatus  orderStatus?
+  orderContent String?
+  orderNumber  String       @unique
+  User         User?        @relation(fields: [recepient], references: [id])
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model User {
+  id         BigInt   @id(map: "users_pkey") @default(autoincrement())
+  created_at DateTime @default(now()) @db.Timestamptz(6)
+  username   String
+  password   String
+  email      String   @unique
+  Order      Order[]
+}
+
+/// This enum is commented in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+enum orderStatus {
+  Order_Placed     @map("Order Placed")
+  Order_Shipped    @map("Order Shipped")
+  In_Transit       @map("In Transit")
+  Arrived_at_Hub   @map("Arrived at Hub")
+  Out_for_Delivery @map("Out for Delivery")
+  Delivered
+}
