@@ -122,7 +122,12 @@ export const CourierRegisterForm = ({
                     name="orderNumber"
                     render={({ field }) => (
                       <FormItem className="w-full">
-                        <FormLabel>Order #</FormLabel>
+                        <FormLabel className="items-center">
+                          Order #{" "}
+                          <span className="text-xs bg-red-500 text-white rounded-lg p-1">
+                            generated
+                          </span>
+                        </FormLabel>
                         <FormControl>
                           <div className="flex flex-row">
                             <Input
@@ -153,7 +158,9 @@ export const CourierRegisterForm = ({
                     name="recipient"
                     render={({ field }) => (
                       <FormItem className="w-full">
-                        <FormLabel>Recipient</FormLabel>
+                        <FormLabel>
+                          Recipient <span className="text-red-500">*</span>
+                        </FormLabel>
                         <FormControl>
                           <Input
                             {...field}
@@ -171,7 +178,9 @@ export const CourierRegisterForm = ({
                     name="sender"
                     render={({ field }) => (
                       <FormItem className="w-full">
-                        <FormLabel>Sender</FormLabel>
+                        <FormLabel>
+                          Sender <span className="text-red-500">*</span>
+                        </FormLabel>
                         <FormControl>
                           <Input
                             {...field}
@@ -189,7 +198,9 @@ export const CourierRegisterForm = ({
                     name="orderContent"
                     render={({ field }) => (
                       <FormItem className="w-full">
-                        <FormLabel>Content</FormLabel>
+                        <FormLabel>
+                          Content <span className="text-red-500">*</span>
+                        </FormLabel>
                         <FormControl>
                           <Input
                             {...field}

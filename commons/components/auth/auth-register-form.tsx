@@ -65,7 +65,10 @@ export const RegisterForm = () => {
               name="username"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{registerFormConfig.usernameFormLabel}</FormLabel>
+                  <FormLabel>
+                    {registerFormConfig.usernameFormLabel}{" "}
+                    <span className="text-red-500">*</span>
+                  </FormLabel>
                   <FormControl>
                     <Input
                       {...field}
@@ -84,7 +87,10 @@ export const RegisterForm = () => {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{registerFormConfig.emailFormLabel}</FormLabel>
+                  <FormLabel>
+                    {registerFormConfig.emailFormLabel}{" "}
+                    <span className="text-red-500">*</span>
+                  </FormLabel>
                   <FormControl>
                     <Input
                       {...field}
@@ -103,7 +109,10 @@ export const RegisterForm = () => {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{registerFormConfig.passFormLabel}</FormLabel>
+                  <FormLabel>
+                    {registerFormConfig.passFormLabel}{" "}
+                    <span className="text-red-500">*</span>
+                  </FormLabel>
                   <FormControl>
                     <Input
                       {...field}
