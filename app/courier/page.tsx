@@ -2,12 +2,11 @@ import CourierOrderTable from "@/commons/components/courier/table/courier-order-
 import Loading from "@/commons/components/loading";
 import { Suspense } from "react";
 
-export default function CourierLandingPage() {
+export default async function CourierLandingPage() {
   return (
     <main className="w-full flex flex-col mt-3">
       <div className="flex  w-full">
         <Suspense fallback={<Loading />}>
-          // @ts-expect-error
           <CourierOrderTable />
         </Suspense>
       </div>
