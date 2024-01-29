@@ -8,8 +8,9 @@ export default function Home() {
       <div className="bg-slate-500 font-mono text-sm text-gray-200 p-3 shadow rounded-md flex flex-col">
         <span>Auth/Register is working, via Supabase/Prisma/Iron-Session </span>
         <div className="flex flex-col text-gray-300/70">
-          <span>//mail: dinogomez17@noovid.com </span>
-          <span>//pass: power12</span>
+          <span>//note: Registerd User Credentials </span>
+          <span>//email: dinogomez17@noovid.com </span>
+          <span>//pass: power123</span>
         </div>
       </div>
     </main>
