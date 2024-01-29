@@ -22,7 +22,7 @@ export default function LandingCard({
   asChild,
 }: LandingCardProps) {
   return (
-    <Card className="max-w-md w-full shadow-lg">
+    <Card className="max-w-lg w-full shadow-lg">
       <CardHeader className="bg-primary items-center text-white rounded-t-md">
         <CardTitle className="text-3xl font-semibold -skew-x-12 font-mono ">
           {title}

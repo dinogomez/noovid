@@ -3,8 +3,15 @@ import { siteConfig } from "@/commons/config";
 
 export default function Home() {
   return (
-    <main className="flex h-full flex-col items-center justify-center px-12 pt-36 xs:p-36">
+    <main className="flex h-full flex-col items-center justify-center px-12 pt-36 xs:p-36 space-y-2">
       <LandingCard title={siteConfig.title} desc={siteConfig.desc} />
+      <div className="bg-slate-500 font-mono text-sm text-gray-200 p-3 shadow rounded-md flex flex-col">
+        <span>Auth/Register is working, via Supabase/Prisma/Iron-Session </span>
+        <div className="flex flex-col text-gray-300/70">
+          <span>//mail: dinogomez17@noovid.com </span>
+          <span>//pass: power12</span>
+        </div>
+      </div>
     </main>
   );
 }
