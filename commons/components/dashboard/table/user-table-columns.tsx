@@ -8,6 +8,7 @@ import { OrderSchema } from "@/commons/schema";
 import { CalendarIcon } from "@radix-ui/react-icons";
 import { ColumnDef } from "@tanstack/react-table";
 import * as z from "zod";
+import { Button } from "../../ui/button";
 
 export const columns: ColumnDef<z.infer<typeof OrderSchema>>[] = [
   {
@@ -84,9 +85,28 @@ export const columns: ColumnDef<z.infer<typeof OrderSchema>>[] = [
   {
     accessorKey: "isDelivered",
     header: "Recieved",
-    cell: ToggleCell,
+    cell: ({ row }) => {
+      const value: "Yes" | "No" = row.getValue("isDelivered");
+      if (value === "Yes") {
+        return (
+          <Button className="p-0" variant="ghost" disabled>
+            <Badge className="inline-block p-0 min-w-4">{value}</Badge>
+          </Button>
+        );
+      }
+      return (
+        <Button className="p-0" variant="ghost">
+          <Badge className="inline-block p-0 min-w-4">{value}</Badge>
+        </Button>
+      );
+    },
     filterFn: (row, id, value) => {
       return value.includes(row.getValue(id));
     },
+  },
+  {
+    accessorKey: "actions",
+    header: "Actions",
+    cell: ToggleCell,
   },
 ];

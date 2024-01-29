@@ -20,8 +20,10 @@ const config = {
     },
     extend: {
       minWidth: {
-        "8": "8rem",
         "4": "4rem",
+        "5": "5rem",
+        "6": "6rem",
+        "8": "8rem",
       },
       colors: {
         border: "hsl(var(--border))",

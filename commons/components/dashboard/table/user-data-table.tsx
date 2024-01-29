@@ -25,7 +25,6 @@ import {
 import React, { useEffect, useTransition } from "react";
 
 import GuidePopover from "@/commons/components/guide-popover";
-import { Badge } from "@/commons/components/ui/badge";
 import { Button } from "@/commons/components/ui/button";
 import { DataTableViewOptions } from "@/commons/components/ui/data-table/data-table-col-toggle";
 import { DataTableFacetedFilter } from "@/commons/components/ui/data-table/data-table-faceted-filter";
@@ -36,6 +35,7 @@ import {
 import { DataTablePagination } from "@/commons/components/ui/data-table/data-table-pagination";
 import { Input } from "@/commons/components/ui/input";
 import { clearCachesByServerAction } from "@/commons/lib/actions";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Toaster } from "sonner";
 
@@ -138,7 +138,7 @@ export function UserDataTable<TData, TValue>({
               column={table.getColumn("isDelivered")}
               title="Recieved"
               options={deliveredStatus}
-              defaultValueSelected="No"
+              // defaultValueSelected="No"
             />
           )}
           {isFiltered && (
@@ -154,17 +154,14 @@ export function UserDataTable<TData, TValue>({
           )}
         </div>
         <div className="flex space-x-2">
-          <GuidePopover buttonLabel="Guide">
-            <div className="flex flex-col gap-y-2 text-sm">
-              <div className="flex items-center text-sm">
-                <Badge variant="outlineDestructive" className=" mr-2">
-                  No
-                </Badge>{" "}
-                <span className="text-xs">
-                  {" "}
-                  Click the Button if you recieved the shipment.
+          <GuidePopover buttonLabel="About">
+            <div className=" text-sm font-mono italic text-center">
+              - made with love by{" "}
+              <Link href="https://github.com/dinogomez/noovid">
+                <span className="font-bold text-blue-500 hover:underline decoration-blue-500">
+                  @dinogomez
                 </span>
-              </div>
+              </Link>
             </div>
           </GuidePopover>
           <DataTableViewOptions table={table} />

@@ -26,8 +26,10 @@ const ToggleCell = ({ row }: any) => {
   const value: "Yes" | "No" = row.getValue("isDelivered");
   if (value === "Yes") {
     return (
-      <Button className="p-0 py-4" variant="ghost" disabled>
-        <Badge className="inline-block py-1 min-w-4">{value}</Badge>
+      <Button className="p-0 " variant="ghost" disabled>
+        <Badge variant="success" className=" inline-block py-1 min-w-6">
+          Recieved
+        </Badge>
       </Button>
     );
   }
@@ -38,17 +40,19 @@ const ToggleCell = ({ row }: any) => {
         name="orderNumber"
         value={row.original.orderNumber}
       />
-      <Button className="p-0 " variant="ghost" disabled={isPending}>
+      <Button className="p-0 w-24" variant="ghost" disabled={isPending}>
         <Badge
-          variant="outlineDestructive"
-          className="inline-block py-1 min-w-4 shadow-lg"
+          variant="warn"
+          className="py-1 min-w-5 w-full flex items-center justify-center shadow-lg"
         >
           {isPending ? (
             <div className="flex items-center justify-center">
               <AiOutlineLoading3Quarters className="animate-spin h-3 w-3" />
             </div>
           ) : (
-            "No"
+            <div className="flex items-center justify-center">
+              Recieve Order
+            </div>
           )}
         </Badge>
       </Button>

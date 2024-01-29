@@ -21,14 +21,18 @@ export default function DataTableRemoveButton({
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     startTransition(() => {
-      deleteOrders(formData).then((data) => {
-        if (data.success) {
-          toast.info(data.success);
-        }
-        if (data.error) {
-          toast.error(data.error);
-        }
-      });
+      if (orderNumbersArray.length > 0) {
+        deleteOrders(formData).then((data) => {
+          if (data.success) {
+            toast.info(data.success);
+          }
+          if (data.error) {
+            toast.error(data.error);
+          }
+        });
+      } else {
+        toast.error("No Rows Selected");
+      }
     });
   };
 
