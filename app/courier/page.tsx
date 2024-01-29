@@ -7,6 +7,7 @@ export default function CourierLandingPage() {
     <main className="w-full flex flex-col mt-3">
       <div className="flex  w-full">
         <Suspense fallback={<Loading />}>
+          // @ts-expect-error
           <CourierOrderTable />
         </Suspense>
       </div>
