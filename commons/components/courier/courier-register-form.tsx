@@ -94,6 +94,7 @@ export const CourierRegisterForm = ({
             onClick={() => {
               generateOrderNumber();
             }}
+            className="px-3.5"
             variant="outline"
           >
             <PlusCircledIcon className="mr-2 h-4 w-4" />

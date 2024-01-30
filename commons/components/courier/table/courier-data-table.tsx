@@ -27,16 +27,16 @@ import React, { useEffect, useTransition } from "react";
 import { CourierRegisterForm } from "@/commons/components/courier/courier-register-form";
 import { Button } from "@/commons/components/ui/button";
 import { DataTableViewOptions } from "@/commons/components/ui/data-table/data-table-col-toggle";
-import { DataTableFacetedFilter } from "@/commons/components/ui/data-table/data-table-faceted-filter";
-import {
-  deliveredStatus,
-  orderStatus,
-} from "@/commons/components/ui/data-table/data-table-options";
 import { DataTablePagination } from "@/commons/components/ui/data-table/data-table-pagination";
 import { Input } from "@/commons/components/ui/input";
 import { clearCachesByServerAction } from "@/commons/lib/actions";
 import { useRouter } from "next/navigation";
 import { Toaster } from "sonner";
+import { DataTableFacetedFilter } from "../../ui/data-table/data-table-faceted-filter";
+import {
+  deliveredStatus,
+  orderStatus,
+} from "../../ui/data-table/data-table-options";
 import DataTableRemoveButton from "../../ui/data-table/data-table-remove-button";
 
 interface DataTableProps<TData, TValue> {
@@ -114,73 +114,84 @@ export function CourierDataTable<TData, TValue>({
 
   return (
     <>
-      <div className="flex items-center justify-between">
-        <div className="flex flex-1 items-center space-x-2">
-          <CourierRegisterForm triggerButtonLabel={"Add"} />
-          <DataTableRemoveButton
-            rows={table.getFilteredSelectedRowModel().rows}
-          />
-          <Input
-            placeholder="Filter Orders..."
-            value={filtering}
-            onChange={(event) => {
-              setFiltering(event.target.value);
-            }}
-            className="h-8 w-[150px] lg:w-[250px]"
-          />
-          {table.getColumn("orderStatus") && (
-            <DataTableFacetedFilter
-              column={table.getColumn("orderStatus")}
-              title="Status"
-              options={orderStatus}
-            />
-          )}
-          {table.getColumn("isDelivered") && (
-            <DataTableFacetedFilter
-              column={table.getColumn("isDelivered")}
-              title="Recieved"
-              options={deliveredStatus}
-            />
-          )}
-          {isFiltered && (
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => table.resetColumnFilters()}
-              className="h-8 px-2 lg:px-3  border-dashed"
-            >
-              <EraserIcon className="mr-2 h-4 w-4" />
-              Reset
-            </Button>
-          )}
+      <div className="flex items-center justify-between sm:space-x-2 space-x-0 flex-col sm:flex-row space-y-2 sm:space-y-0">
+        <div className="flex w-full sm:w-fit items-center space-x-2 ">
+          <div className="flex w-full space-x-2 justify-between">
+            <div className="flex space-x-2 ">
+              <CourierRegisterForm triggerButtonLabel={"Order"} />
+              <DataTableRemoveButton
+                rows={table.getFilteredSelectedRowModel().rows}
+              />
+            </div>
+            <div className="">
+              {" "}
+              <Input
+                placeholder="Filter Orders..."
+                value={filtering}
+                onChange={(event) => {
+                  setFiltering(event.target.value);
+                }}
+                className="h-8 w-full lg:w-[250px]"
+              />
+            </div>
+          </div>
         </div>
-        <div className="flex space-x-2">
-          <DataTableViewOptions table={table} />
+        <div className="flex w-full sm:w-fit justify-between flex-1 space-x-2">
+          <div className="space-x-2">
+            {table.getColumn("orderStatus") && (
+              <DataTableFacetedFilter
+                column={table.getColumn("orderStatus")}
+                title="Status"
+                options={orderStatus}
+              />
+            )}
+            {table.getColumn("isDelivered") && (
+              <DataTableFacetedFilter
+                column={table.getColumn("isDelivered")}
+                title="Recieved"
+                options={deliveredStatus}
+              />
+            )}
+            {isFiltered && (
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => table.resetColumnFilters()}
+                className="h-8 px-2 lg:px-3  border-dashed"
+              >
+                <EraserIcon className="mr-2 h-4 w-4" />
+                Reset
+              </Button>
+            )}
+          </div>
+          <div className="flex items-center space-x-4 flex-1">
+            <DataTableViewOptions table={table} />
 
-          <form
-            action={() => {
-              onSubmit();
-            }}
-          >
-            <Button
-              variant="outline"
-              size="sm"
-              className="ml-auto  h-8 lg:flex"
-              disabled={isPending}
+            <form
+              action={() => {
+                onSubmit();
+              }}
             >
-              {isPending ? (
-                <div className="flex items-center">
-                  <ReloadIcon className="animate-spin h-4 w-4 mr-3 " />
-                  Reloading
-                </div>
-              ) : (
-                <div className="flex items-center">
-                  <ReloadIcon className=" h-4 w-4 mr-3 " />
-                  Refresh
-                </div>
-              )}
-            </Button>
-          </form>
+              <Button
+                variant="outline"
+                size="sm"
+                className="ml-auto  h-8 lg:flex"
+                disabled={isPending}
+              >
+                {isPending ? (
+                  <div className="flex items-center">
+                    <ReloadIcon className="animate-spin h-4 w-4 mr-3 " />
+                    Reloading
+                  </div>
+                ) : (
+                  <div className="flex items-center">
+                    <ReloadIcon className=" h-4 w-4 mr-3 " />
+                    Refresh
+                  </div>
+                )}
+              </Button>
+            </form>
+          </div>
         </div>
       </div>
       <div className="rounded-md border w-full">
