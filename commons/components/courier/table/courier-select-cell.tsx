@@ -43,7 +43,7 @@ const SelectCell = ({ getValue, row, column, table }: any) => {
           });
         }}
       >
-        <SelectTrigger className="w-full lg:w-4/6">
+        <SelectTrigger className="w-fit ">
           <SelectValue />
         </SelectTrigger>
         <SelectContent>
